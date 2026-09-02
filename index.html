@@ -3,10 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NubeEscolar | Iniciar Sesión</title>
+  
+  <!-- SEO Principal -->
+  <title>NubeEscolar | Plataforma de Gestión Académica y Software para Colegios</title>
+  <meta name="description" content="NubeEscolar es la plataforma en la nube para la gestión académica escolar. Control de notas, boletines en PDF, certificados, asistencia y comunicación para colegios.">
+  <meta name="keywords" content="NubeEscolar, plataforma de gestion academica, software para colegios, sistema de notas escolares, boletines escolares PDF, control academico escolar, plataforma educativa Colombia">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="NubeEscolar">
+  <link rel="canonical" href="https://nubeescolar.com/">
+
+  <!-- Datos de GeoPosicionamiento (SEO Local Colombia) -->
+  <meta name="geo.region" content="CO">
+  <meta name="geo.placename" content="Colombia">
+
+  <!-- Open Graph / Facebook / WhatsApp (Para cuando compartas el enlace por chat o redes) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nubeescolar.com/">
+  <meta property="og:title" content="NubeEscolar | Plataforma de Gestión Académica para Colegios">
+  <meta property="og:description" content="Gestiona notas, boletines PDF, certificados y la comunicación de tu institución educativa de forma rápida y 100% en la nube.">
+  <meta property="og:image" content="https://nubeescolar.com/og-image.png">
+  <meta property="og:site_name" content="NubeEscolar">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://nubeescolar.com/">
+  <meta name="twitter:title" content="NubeEscolar | Plataforma de Gestión Académica">
+  <meta name="twitter:description" content="Software en la nube para el control de notas, generación de boletines y certificados académicos.">
+  <meta name="twitter:image" content="https://nubeescolar.com/og-image.png">
+
+  <!-- Estructura de Datos JSON-LD para Google (Schema.org / SoftwareApplication) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "NubeEscolar",
+    "operatingSystem": "Web, All",
+    "applicationCategory": "EducationalApplication",
+    "description": "Plataforma en la nube de gestión académica escolar para el control de calificaciones, emisión de boletines y administración de instituciones educativas.",
+    "url": "https://nubeescolar.com/",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "COP"
+    }
+  }
+  </script>
+
+  <!-- Tailwind CSS CDN para estilos -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Canvas dinámico de fondo */
     #bg-canvas {
       position: absolute;
       top: 0;
@@ -105,7 +150,6 @@
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Fondo sutil con degradado
       const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
       gradient.addColorStop(0, '#0f172a');
       gradient.addColorStop(1, '#1e1b4b');
