@@ -6,6 +6,9 @@
   <title>NubeEscolar | Inscripción de Matrícula - I.E.D. Rural San Andrés</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><path d='M3 15a4 4 0 004 4h9a5 5 0 001-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z'/></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Librería para descarga directa de PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
 
@@ -203,8 +206,22 @@
           </div>
 
           <div>
-            <label class="block font-semibold text-slate-700 mb-1">EPS o Afiliación de Salud *</label>
-            <input type="text" id="eps" name="eps" required placeholder="Ej: Coosalud, Nueva EPS" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <label class="block font-semibold text-slate-700 mb-1">EPS / SALUD *</label>
+            <select id="eps" name="eps" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="">Seleccionar EPS...</option>
+              <option value="NUEVA EPS">NUEVA EPS</option>
+              <option value="SALUD TOTAL EPS">SALUD TOTAL EPS</option>
+              <option value="EPS SANITAS">EPS SANITAS</option>
+              <option value="COOSALUD EPS">COOSALUD EPS</option>
+              <option value="MUTUAL SER EPS">MUTUAL SER EPS</option>
+              <option value="PROTEGER EPS">PROTEGER EPS</option>
+              <option value="EPS SURA">EPS SURA</option>
+              <option value="FAMISANAR EPS">FAMISANAR EPS</option>
+              <option value="COMPENSAR EPS">COMPENSAR EPS</option>
+              <option value="SANIDAD POLICÍA NACIONAL">SANIDAD POLICÍA NACIONAL</option>
+              <option value="SANIDAD EJÉRCITO / FF.MM.">SANIDAD EJÉRCITO / FF.MM.</option>
+              <option value="OTRA / PARTICULAR">OTRA / PARTICULAR</option>
+            </select>
           </div>
 
           <div>
@@ -225,8 +242,8 @@
       </section>
 
       <!-- Botón Guardar / Enviar -->
-      <button type="submit" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-200 text-sm transition-all flex items-center justify-center gap-2">
-        <span>🚀</span> Finalizar y Generar Matrícula PDF
+      <button id="btn-submit" type="submit" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-200 text-sm transition-all flex items-center justify-center gap-2">
+        <span>🚀</span> Descargar PDF de Matrícula
       </button>
 
     </form>
@@ -237,11 +254,255 @@
     © 2026 NubeEscolar • Plataforma de Gestión de Matrículas I.E.D. Rural San Andrés
   </footer>
 
+  <!-- PLANTILLA OCULTA DE COMPROBANTE CENTRADA -->
+  <div style="position: fixed; top: 0; left: 0; width: 100%; opacity: 0; z-index: -9999; pointer-events: none;">
+    <div id="pdf-template" style="width: 100%; max-width: 750px; margin: 0 auto; background-color: #ffffff; color: #000000; padding: 20px; font-family: Arial, Helvetica, sans-serif; font-size: 11px; box-sizing: border-box; -webkit-font-smoothing: antialiased;">
+      
+      <!-- ENCABEZADO INSTITUCIONAL -->
+      <div style="border: 1px solid #cbd5e1; border-radius: 16px; padding: 16px 20px; margin-bottom: 12px; background-color: #ffffff;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr>
+            <!-- Columna Logo Escudo Institucional -->
+            <td style="width: 75px; vertical-align: middle; padding-right: 12px;">
+              <svg width="68" height="74" viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 5 L90 25 V60 C90 85 50 105 50 105 C50 105 10 85 10 60 V25 Z" fill="#1e293b" stroke="#1d4ed8" stroke-width="3"/>
+                <path d="M50 10 L85 28 V58 C85 80 50 98 50 98 C50 98 15 80 15 58 V28 Z" fill="#ffffff"/>
+                <path d="M50 14 L80 30 V55 C80 72 50 88 50 88 C50 88 20 72 20 55 V30 Z" fill="#1d4ed8"/>
+                <circle cx="50" cy="48" r="18" fill="#fbbf24" stroke="#ffffff" stroke-width="2"/>
+                <path d="M42 45 L50 38 L58 45 V54 H42 Z" fill="#ef4444"/>
+                <path d="M40 52 C45 49 50 52 50 52 C50 52 55 49 60 52 V56 C55 53 50 56 50 56 C50 56 45 53 40 56 Z" fill="#ffffff"/>
+                <path d="M10 78 L25 72 L50 82 L75 72 L90 78 L80 86 L50 94 L20 86 Z" fill="#dc2626"/>
+                <path d="M25 72 L50 82 L75 72 L68 76 L50 80 L32 76 Z" fill="#b91c1c"/>
+                <polygon points="50,18 52,22 56,22 53,25 54,29 50,26 46,29 47,25 44,22 48,22" fill="#fbbf24"/>
+                <polygon points="38,22 39,25 43,25 40,27 41,30 38,28 35,30 36,27 33,25 37,25" fill="#fbbf24"/>
+                <polygon points="62,22 63,25 67,25 64,27 65,30 62,28 59,30 60,27 57,25 61,25" fill="#fbbf24"/>
+              </svg>
+            </td>
+
+            <!-- Columna Texto Institucional -->
+            <td style="vertical-align: middle;">
+              <h1 style="font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 18px; font-weight: 900; color: #000000; margin: 0; padding: 0; line-height: 1.1; letter-spacing: -0.2px;">
+                I.E.D. RURAL SAN ANDRÉS
+              </h1>
+              <p style="font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; font-weight: 800; color: #000000; margin: 6px 0 0 0; padding: 0; line-height: 1.1;">
+                Calle 2 # 16 – 44, Barranquilla
+              </p>
+              <p style="font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 11px; font-weight: 800; color: #000000; margin: 5px 0 0 0; padding: 0; line-height: 1.1;">
+                DANE: 84455845 &nbsp;&nbsp; Teléfono: 3671054
+              </p>
+            </td>
+            
+            <!-- Columna Título Serif y Código QR -->
+            <td style="text-align: right; vertical-align: middle;">
+              <table style="display: inline-table; border-collapse: collapse;">
+                <tr>
+                  <td style="vertical-align: middle; padding-right: 14px; text-align: right;">
+                    <div style="font-family: 'Times New Roman', Times, Georgia, serif; font-size: 11px; font-weight: bold; color: #1e293b; text-transform: uppercase; line-height: 1.25; letter-spacing: 0.2px;">
+                      COMPROBANTE OFICIAL DE<br>MATRICULA ESCOLAR No 00037
+                    </div>
+                  </td>
+                  <td style="vertical-align: middle;">
+                    <img id="pdf_qr_img" src="https://api.quickchart.io/qr?text=https%3A%2F%2Fnubeescolar.com&size=150" alt="QR" style="width: 62px; height: 62px; display: block;" crossorigin="anonymous">
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- BANNER VERDE REGISTRO COMPLETO -->
+      <div style="background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 10px 14px; margin-bottom: 12px;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr>
+            <td style="width: 25px; font-size: 15px; font-weight: bold; color: #16a34a; vertical-align: middle;">✓</td>
+            <td>
+              <div style="font-weight: 800; color: #15803d; font-size: 11px;">Registro Completo y Confirmado</div>
+              <div style="color: #166534; font-size: 9.5px;">Los datos del estudiante han sido almacenados correctamente en la plataforma NubeEscolar.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- 1. ESTUDIANTE -->
+      <div style="border: 1px solid #cbd5e1; border-radius: 10px; padding: 10px 12px; margin-bottom: 12px; background-color: #ffffff;">
+        <div style="font-size: 11.5px; font-weight: 800; color: #1e1b4b; margin-bottom: 8px;">1. INFORMACIÓN DEL ESTUDIANTE</div>
+        
+        <table style="width: 100%; border-collapse: separate; border-spacing: 5px; font-size: 10px;">
+          <tr>
+            <td style="width: 50%;">
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">Tipo de Documento</div>
+              <div id="pdf_est_tipo_doc" style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #000000;"></div>
+            </td>
+            <td style="width: 50%;">
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">Número de Documento</div>
+              <div id="pdf_est_doc" style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #000000;"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">Nombres Completos</div>
+              <div id="pdf_est_nombres" style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #000000;"></div>
+            </td>
+            <td>
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">Apellidos Completos</div>
+              <div id="pdf_est_apellidos" style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #000000;"></div>
+            </td>
+          </tr>
+        </table>
+
+        <table style="width: 100%; border-collapse: separate; border-spacing: 5px; font-size: 10px;">
+          <tr>
+            <td style="width: 33%;">
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">Fecha de Nacimiento</div>
+              <div id="pdf_est_fecha_nac" style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #000000;"></div>
+            </td>
+            <td style="width: 33%;">
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">Edad Calculada</div>
+              <div id="pdf_est_edad" style="background-color: #e0e7ff; border: 1px solid #c7d2fe; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #3730a3;"></div>
+            </td>
+            <td style="width: 34%;">
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">Teléfono / Celular</div>
+              <div id="pdf_est_celular" style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #000000;"></div>
+            </td>
+          </tr>
+        </table>
+
+        <table style="width: 100%; border-collapse: separate; border-spacing: 5px; font-size: 10px;">
+          <tr>
+            <td style="width: 50%;">
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">Correo Electrónico</div>
+              <div id="pdf_est_correo" style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #000000;"></div>
+            </td>
+            <td style="width: 50%;">
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">Dirección de Residencia</div>
+              <div id="pdf_est_direccion" style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #000000;"></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- 2. ACUDIENTE -->
+      <div style="border: 1px solid #cbd5e1; border-radius: 10px; padding: 10px 12px; margin-bottom: 12px; background-color: #ffffff;">
+        <div style="font-size: 11.5px; font-weight: 800; color: #1e1b4b; margin-bottom: 8px;">2. INFORMACIÓN DEL ACUDIENTE / TUTOR</div>
+
+        <table style="width: 100%; border-collapse: separate; border-spacing: 5px; font-size: 10px;">
+          <tr>
+            <td style="width: 50%;">
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">Tipo de Documento</div>
+              <div id="pdf_acu_tipo_doc" style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #000000;"></div>
+            </td>
+            <td style="width: 50%;">
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">Número de Documento</div>
+              <div id="pdf_acu_doc" style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #000000;"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">Nombres Completos</div>
+              <div id="pdf_acu_nombres" style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #000000;"></div>
+            </td>
+            <td>
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">Apellidos Completos</div>
+              <div id="pdf_acu_apellidos" style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #000000;"></div>
+            </td>
+          </tr>
+        </table>
+
+        <table style="width: 100%; border-collapse: separate; border-spacing: 5px; font-size: 10px;">
+          <tr>
+            <td style="width: 33%;">
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">Teléfono Contacto</div>
+              <div id="pdf_acu_celular" style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #000000;"></div>
+            </td>
+            <td style="width: 33%;">
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">Correo Electrónico</div>
+              <div id="pdf_acu_correo" style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #000000;"></div>
+            </td>
+            <td style="width: 34%;">
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">Dirección</div>
+              <div id="pdf_acu_direccion" style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #000000;"></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- 3. ACADÉMICA Y SALUD -->
+      <div style="border: 1px solid #cbd5e1; border-radius: 10px; padding: 10px 12px; margin-bottom: 12px; background-color: #ffffff;">
+        <div style="font-size: 11.5px; font-weight: 800; color: #1e1b4b; margin-bottom: 8px;">3. INFORMACIÓN ACADÉMICA Y SALUD</div>
+        <table style="width: 100%; border-collapse: separate; border-spacing: 5px; font-size: 10px;">
+          <tr>
+            <td style="width: 33%;">
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">Grado al que Aspira</div>
+              <div id="pdf_grado_aspira" style="background-color: #e0e7ff; border: 1px solid #c7d2fe; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #3730a3;"></div>
+            </td>
+            <td style="width: 33%;">
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">EPS / Salud</div>
+              <div id="pdf_eps" style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #000000;"></div>
+            </td>
+            <td style="width: 34%;">
+              <div style="font-size: 8.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px;">RH / Grupo Sanguíneo</div>
+              <div id="pdf_rh" style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 5px; padding: 5px 8px; font-weight: 700; color: #000000;"></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- FIRMAS (Ajustado margin-top a 40px para bajarlas suavemente) -->
+      <table style="width: 100%; margin-top: 40px; border-collapse: collapse;">
+        <tr>
+          <td style="width: 45%; text-align: center; border-top: 1px solid #64748b; padding-top: 5px;">
+            <div style="font-weight: 700; font-size: 9.5px; color: #1e293b;">Firma del Acudiente / Tutor</div>
+            <div style="font-size: 8.5px; color: #64748b; margin-top: 1px;">C.C. No. <span id="pdf_firma_acu_doc"></span></div>
+          </td>
+          <td style="width: 10%;"></td>
+          <td style="width: 45%; text-align: center; border-top: 1px solid #64748b; padding-top: 5px;">
+            <div style="font-weight: 700; font-size: 9.5px; color: #1e293b;">Rectoría / Secretaría Académica</div>
+            <div style="font-size: 8.5px; color: #64748b; margin-top: 1px;">I.E.D. Rural San Andrés</div>
+          </td>
+        </tr>
+      </table>
+
+      <!-- PIE DE PÁGINA -->
+      <div style="margin-top: 25px; padding-top: 5px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 8.5px; color: #64748b;">
+          <tr>
+            <!-- IZQUIERDA: ICONO NUBE SVG + TEXTO -->
+            <td style="text-align: left; font-weight: 700; color: #475569; vertical-align: middle;">
+              <table style="border-collapse: collapse; display: inline-table;">
+                <tr>
+                  <td style="vertical-align: middle; padding-right: 4px;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#4f46e5" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+                      <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+                    </svg>
+                  </td>
+                  <td style="vertical-align: middle; font-weight: 700; color: #475569;">
+                    www.nubeescolar.com
+                  </td>
+                </tr>
+              </table>
+            </td>
+
+            <!-- CENTRO: TEXTO DEL SISTEMA ÚNICO DE MATRÍCULAS -->
+            <td style="text-align: center; font-size: 8px; color: #64748b; vertical-align: middle;">
+              Documento generado electrónicamente por NubeEscolar Sistema Único de Matrículas
+            </td>
+
+            <!-- DERECHA: FECHA -->
+            <td style="text-align: right; font-weight: 700; color: #475569; vertical-align: middle;">
+              Fecha: <span id="pdf_fecha_guardado">--/--/----</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
   <!-- SCRIPT LÓGICO -->
   <script>
     const form = document.getElementById('matricula-form');
 
-    // 1. Cálculo Automático de Edad
     function calcularEdad() {
       const fechaNacInput = document.getElementById('est_fecha_nac').value;
       if (!fechaNacInput) return;
@@ -258,7 +519,6 @@
       document.getElementById('est_edad').value = `${edad} años`;
     }
 
-    // 2. Autoguardado en LocalStorage
     form.addEventListener('input', () => {
       const formData = new FormData(form);
       const data = {};
@@ -266,7 +526,6 @@
       localStorage.setItem('borrador_matricula', JSON.stringify(data));
     });
 
-    // Cargar datos guardados si existen
     window.addEventListener('DOMContentLoaded', () => {
       const guardado = localStorage.getItem('borrador_matricula');
       if (guardado) {
@@ -288,348 +547,74 @@
       }
     }
 
-    // 3. Generador de PDF Nativo con el Diseño Exacto
-  form.addEventListener('submit', function(e) {
-  e.preventDefault();
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
 
-  const fechaPartes = form.est_fecha_nac.value.split('-');
-  const fechaNacFmt = `${fechaPartes[2]}/${fechaPartes[1]}/${fechaPartes[0]}`;
+      const btnSubmit = document.getElementById('btn-submit');
+      const textOriginal = btnSubmit.innerHTML;
+      btnSubmit.innerHTML = '⏳ Generando PDF...';
+      btnSubmit.disabled = true;
 
-  const pdfWin = window.open('', '_blank');
-  pdfWin.document.write(`
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-      <meta charset="UTF-8">
-      <title>Comprobante_Matricula_${form.est_doc.value}</title>
-      <style>
-        /* FORZAR IMPRESIÓN DE FONDOS Y COLORES */
-        @media print {
-          * {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-            color-adjust: exact !important;
-          }
-          @page {
-            size: letter;
-            margin: 8mm;
-          }
-        }
+      const fechaPartes = form.est_fecha_nac.value.split('-');
+      const fechaNacFmt = fechaPartes.length === 3 ? `${fechaPartes[2]}/${fechaPartes[1]}/${fechaPartes[0]}` : '';
 
-        * {
-          box-sizing: border-box;
-          margin: 0;
-          padding: 0;
-          font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
+      const hoy = new Date();
+      const dia = String(hoy.getDate()).padStart(2, '0');
+      const mes = String(hoy.getMonth() + 1).padStart(2, '0');
+      const anio = hoy.getFullYear();
+      const fechaGuardadoFmt = `${dia}/${mes}/${anio}`;
 
-        body {
-          background-color: #ffffff;
-          color: #1e293b;
-          padding: 12px;
-          font-size: 11px;
-        }
+      document.getElementById('pdf_est_tipo_doc').innerText = form.est_tipo_doc.value;
+      document.getElementById('pdf_est_doc').innerText = form.est_doc.value;
+      document.getElementById('pdf_est_nombres').innerText = `${form.est_nombre1.value} ${form.est_nombre2.value}`.trim();
+      document.getElementById('pdf_est_apellidos').innerText = `${form.est_apellido1.value} ${form.est_apellido2.value}`.trim();
+      document.getElementById('pdf_est_fecha_nac').innerText = fechaNacFmt;
+      document.getElementById('pdf_est_edad').innerText = form.est_edad.value;
+      document.getElementById('pdf_est_celular').innerText = form.est_celular.value;
+      document.getElementById('pdf_est_correo').innerText = form.est_correo.value || 'No registrado';
+      document.getElementById('pdf_est_direccion').innerText = form.est_direccion.value;
 
-        /* HEADER AZUL OSCURO CON AÑO LECTIVO */
-        .header {
-          background-color: #1b1b3f !important;
-          color: #ffffff !important;
-          padding: 20px 24px;
-          border-radius: 16px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 16px;
-        }
-        .header-title {
-          font-size: 20px;
-          font-weight: 800;
-          letter-spacing: 0.5px;
-          color: #ffffff !important;
-        }
-        .header-subtitle {
-          font-size: 11px;
-          color: #818cf8 !important;
-          font-weight: 700;
-          margin-top: 4px;
-          letter-spacing: 0.5px;
-        }
-        .badge-year {
-          background-color: #312e81 !important;
-          color: #ffffff !important;
-          padding: 8px 18px;
-          border-radius: 9999px;
-          font-size: 11px;
-          font-weight: 700;
-          border: 1px solid #4338ca;
-          display: inline-block;
-        }
+      document.getElementById('pdf_acu_tipo_doc').innerText = form.acu_tipo_doc.value;
+      document.getElementById('pdf_acu_doc').innerText = form.acu_doc.value;
+      document.getElementById('pdf_acu_nombres').innerText = form.acu_nombres.value;
+      document.getElementById('pdf_acu_apellidos').innerText = form.acu_apellidos.value;
+      document.getElementById('pdf_acu_celular').innerText = form.acu_celular.value;
+      document.getElementById('pdf_acu_correo').innerText = form.acu_correo.value;
+      document.getElementById('pdf_acu_direccion').innerText = form.acu_direccion.value;
+      document.getElementById('pdf_firma_acu_doc').innerText = form.acu_doc.value;
 
-        /* BANNER CONFIRMACIÓN VERDE */
-        .status-box {
-          background-color: #f0fdf4 !important;
-          border: 1px solid #bbf7d0;
-          border-radius: 12px;
-          padding: 12px 16px;
-          margin-bottom: 16px;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-        .status-icon {
-          color: #16a34a !important;
-          font-size: 16px;
-          font-weight: bold;
-        }
-        .status-title {
-          font-weight: 800;
-          color: #15803d !important;
-          font-size: 12px;
-        }
-        .status-desc {
-          color: #166534 !important;
-          font-size: 10px;
-        }
+      document.getElementById('pdf_grado_aspira').innerText = form.grado_aspira.value;
+      document.getElementById('pdf_eps').innerText = form.eps.value;
+      document.getElementById('pdf_rh').innerText = form.rh.value;
 
-        /* SECCIONES Y CONTENEDORES */
-        .section {
-          border: 1px solid #e2e8f0;
-          border-radius: 16px;
-          padding: 16px;
-          margin-bottom: 16px;
-          background-color: #ffffff;
-        }
-        .section-title {
-          font-size: 13px;
-          font-weight: 800;
-          color: #312e81 !important;
-          margin-bottom: 14px;
-        }
+      document.getElementById('pdf_fecha_guardado').innerText = fechaGuardadoFmt;
 
-        /* FILAS Y CAMPOS GRISES */
-        .grid {
-          display: grid;
-          gap: 10px;
-          margin-bottom: 10px;
-        }
-        .grid-2 { grid-template-columns: 1fr 1fr; }
-        .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+      const element = document.getElementById('pdf-template');
+      const opt = {
+        margin: [5, 5, 5, 5],
+        filename: `Comprobante_Matricula_${form.est_doc.value}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+          scale: 2, 
+          logging: false, 
+          useCORS: true,
+          scrollX: 0,
+          scrollY: 0
+        },
+        jsPDF: { unit: 'mm', format: 'letter', orientation: 'portrait' }
+      };
 
-        .field-group { display: flex; flex-direction: column; }
-        .field-label {
-          font-size: 9px;
-          font-weight: 700;
-          color: #64748b;
-          text-transform: uppercase;
-          margin-bottom: 4px;
-        }
-        .field-value {
-          background-color: #f1f5f9 !important;
-          border: 1px solid #e2e8f0;
-          border-radius: 8px;
-          padding: 8px 12px;
-          font-size: 11px;
-          font-weight: 700;
-          color: #0f172a !important;
-          min-height: 34px;
-          display: flex;
-          align-items: center;
-        }
-        /* CAMPO DESTACADO EN VIOLETA SUAVE */
-        .highlight-value {
-          background-color: #e0e7ff !important;
-          border-color: #c7d2fe;
-          color: #3730a3 !important;
-        }
+      window.scrollTo(0, 0);
 
-        /* SECCIÓN DE FIRMAS */
-        .signatures {
-          margin-top: 30px;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 40px;
-          padding: 0 20px;
-        }
-        .sig-box {
-          text-align: center;
-          border-top: 1px solid #94a3b8;
-          padding-top: 6px;
-        }
-        .sig-line { font-weight: 700; font-size: 10px; color: #334155; }
-        .sig-sub { font-size: 9px; color: #64748b; margin-top: 2px; }
-
-        .footer {
-          margin-top: 20px;
-          text-align: center;
-          font-size: 9px;
-          color: #94a3b8;
-        }
-      </style>
-    </head>
-    <body>
-
-      <!-- HEADER -->
-      <div class="header">
-        <div>
-          <div class="header-title">I.E.D. RURAL SAN ANDRÉS</div>
-          <div class="header-subtitle">COMPROBANTE OFICIAL DE MATRICULA ESCOLAR</div>
-        </div>
-        <div>
-          <span class="badge-year">Año Lectivo 2026</span>
-        </div>
-      </div>
-
-      <!-- BANNER CONFIRMADO -->
-      <div class="status-box">
-        <div class="status-icon">✓</div>
-        <div>
-          <div class="status-title">Registro Completo y Confirmado</div>
-          <div class="status-desc">Los datos del estudiante han sido almacenados correctamente en la plataforma NubeEscolar.</div>
-        </div>
-      </div>
-
-      <!-- 1. ESTUDIANTE -->
-      <div class="section">
-        <div class="section-title">1. INFORMACIÓN DEL ESTUDIANTE</div>
-        
-        <div class="grid grid-2">
-          <div class="field-group">
-            <span class="field-label">Tipo de Documento</span>
-            <div class="field-value">${form.est_tipo_doc.value}</div>
-          </div>
-          <div class="field-group">
-            <span class="field-label">Número de Documento</span>
-            <div class="field-value">${form.est_doc.value}</div>
-          </div>
-        </div>
-
-        <div class="grid grid-2">
-          <div class="field-group">
-            <span class="field-label">Nombres Completos</span>
-            <div class="field-value">${form.est_nombre1.value} ${form.est_nombre2.value}</div>
-          </div>
-          <div class="field-group">
-            <span class="field-label">Apellidos Completos</span>
-            <div class="field-value">${form.est_apellido1.value} ${form.est_apellido2.value}</div>
-          </div>
-        </div>
-
-        <div class="grid grid-3">
-          <div class="field-group">
-            <span class="field-label">Fecha de Nacimiento</span>
-            <div class="field-value">${fechaNacFmt}</div>
-          </div>
-          <div class="field-group">
-            <span class="field-label">Edad Calculada</span>
-            <div class="field-value highlight-value">${form.est_edad.value}</div>
-          </div>
-          <div class="field-group">
-            <span class="field-label">Teléfono / Celular</span>
-            <div class="field-value">${form.est_celular.value}</div>
-          </div>
-        </div>
-
-        <div class="grid grid-2" style="margin-bottom: 0;">
-          <div class="field-group">
-            <span class="field-label">Correo Electrónico</span>
-            <div class="field-value">${form.est_correo.value || 'No registrado'}</div>
-          </div>
-          <div class="field-group">
-            <span class="field-label">Dirección de Residencia</span>
-            <div class="field-value">${form.est_direccion.value}</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2. ACUDIENTE -->
-      <div class="section">
-        <div class="section-title">2. INFORMACIÓN DEL ACUDIENTE / TUTOR</div>
-
-        <div class="grid grid-2">
-          <div class="field-group">
-            <span class="field-label">Tipo de Documento</span>
-            <div class="field-value">${form.acu_tipo_doc.value}</div>
-          </div>
-          <div class="field-group">
-            <span class="field-label">Número de Documento</span>
-            <div class="field-value">${form.acu_doc.value}</div>
-          </div>
-        </div>
-
-        <div class="grid grid-2">
-          <div class="field-group">
-            <span class="field-label">Nombres Completos</span>
-            <div class="field-value">${form.acu_nombres.value}</div>
-          </div>
-          <div class="field-group">
-            <span class="field-label">Apellidos Completos</span>
-            <div class="field-value">${form.acu_apellidos.value}</div>
-          </div>
-        </div>
-
-        <div class="grid grid-3" style="margin-bottom: 0;">
-          <div class="field-group">
-            <span class="field-label">Teléfono de Contacto</span>
-            <div class="field-value">${form.acu_celular.value}</div>
-          </div>
-          <div class="field-group">
-            <span class="field-label">Correo Electrónico</span>
-            <div class="field-value">${form.acu_correo.value}</div>
-          </div>
-          <div class="field-group">
-            <span class="field-label">Dirección</span>
-            <div class="field-value">${form.acu_direccion.value}</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3. ACADÉMICA Y SALUD -->
-      <div class="section">
-        <div class="section-title">3. INFORMACIÓN ACADÉMICA Y SALUD</div>
-        <div class="grid grid-3" style="margin-bottom: 0;">
-          <div class="field-group">
-            <span class="field-label">Grado al que Aspira</span>
-            <div class="field-value highlight-value">${form.grado_aspira.value}</div>
-          </div>
-          <div class="field-group">
-            <span class="field-label">EPS / Salud</span>
-            <div class="field-value">${form.eps.value}</div>
-          </div>
-          <div class="field-group">
-            <span class="field-label">RH / Grupo Sanguíneo</span>
-            <div class="field-value">${form.rh.value}</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- FIRMAS -->
-      <div class="signatures">
-        <div class="sig-box">
-          <div class="sig-line">Firma del Acudiente / Tutor</div>
-          <div class="sig-sub">C.C. No. ${form.acu_doc.value}</div>
-        </div>
-        <div class="sig-box">
-          <div class="sig-line">Rectoría / Secretaría Académica</div>
-          <div class="sig-sub">I.E.D. Rural San Andrés</div>
-        </div>
-      </div>
-
-      <div class="footer">
-        Documento generado electrónicamente por NubeEscolar • Sistema Único de Matrículas
-      </div>
-
-      <script>
-        window.onload = function() {
-          setTimeout(function() {
-            window.print();
-          }, 300);
-        };
-      <\/script>
-    </body>
-    </html>
-  `);
-  pdfWin.document.close();
-});
+      html2pdf().set(opt).from(element).save().then(() => {
+        btnSubmit.innerHTML = textOriginal;
+        btnSubmit.disabled = false;
+      }).catch(err => {
+        console.error('Error al generar PDF:', err);
+        btnSubmit.innerHTML = textOriginal;
+        btnSubmit.disabled = false;
+      });
+    });
   </script>
 </body>
 </html>
