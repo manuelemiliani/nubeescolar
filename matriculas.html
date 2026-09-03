@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NubeEscolar | Inscripción de Matrícula - I.E.D. Rural San Andrés</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><path d='M3 15a4 4 0 004 4h9a5 5 0 001-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z'/></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
+
+  <!-- Header Superior -->
+  <header class="bg-indigo-900 text-white border-b border-indigo-800 sticky top-0 z-50 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-xl shadow-md">
+          ☁️
+        </div>
+        <div>
+          <span class="text-lg font-black tracking-tight">Nube<span class="text-indigo-300">Escolar</span></span>
+          <p class="text-[10px] text-indigo-200">I.E.D. Rural San Andrés</p>
+        </div>
+      </div>
+      <a href="estudiantes.html" class="text-xs bg-indigo-800 hover:bg-indigo-700 px-3 py-1.5 rounded-lg border border-indigo-700 font-semibold transition-colors">
+        ← Volver
+      </a>
+    </div>
+  </header>
+
+  <!-- Formulario Principal -->
+  <main class="max-w-3xl w-full mx-auto px-4 py-6 flex-1 space-y-6">
+
+    <!-- Indicador Autoguardado -->
+    <div class="flex items-center justify-between bg-emerald-50 border border-emerald-200 p-3 rounded-2xl text-xs text-emerald-800">
+      <div class="flex items-center gap-2">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <span class="font-medium">Autoguardado activado: Tus datos se guardan mientras escribes.</span>
+      </div>
+      <button type="button" onclick="limpiarBorrador()" class="text-[11px] underline font-bold text-emerald-900 hover:text-rose-600">
+        Borrar borrador
+      </button>
+    </div>
+
+    <!-- Formulario -->
+    <form id="matricula-form" class="space-y-6">
+
+      <!-- SECCIÓN 1: DATOS DEL ESTUDIANTE -->
+      <section class="bg-white p-5 sm:p-7 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
+        <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+          <span class="text-2xl">🎓</span>
+          <div>
+            <h2 class="text-base font-bold text-slate-800">1. Datos del Estudiante</h2>
+            <p class="text-xs text-slate-500">Información básica del alumno aspirante</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Tipo de Documento *</label>
+            <select id="est_tipo_doc" name="est_tipo_doc" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="">Seleccione...</option>
+              <option value="Registro Civil">Registro Civil</option>
+              <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+              <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
+              <option value="Pasaporte">Pasaporte</option>
+              <option value="PPT">PPT (Permiso por Protección Temporal)</option>
+              <option value="Cédula de Extranjería">Cédula de Extranjería</option>
+              <option value="Documento País de Origen">Documento País de Origen</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Número de Documento *</label>
+            <input type="text" id="est_doc" name="est_doc" required placeholder="Ej: 1045238901" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Primer Nombre *</label>
+            <input type="text" id="est_nombre1" name="est_nombre1" required placeholder="Ej: Carlos" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Segundo Nombre</label>
+            <input type="text" id="est_nombre2" name="est_nombre2" placeholder="Ej: Andrés" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Primer Apellido *</label>
+            <input type="text" id="est_apellido1" name="est_apellido1" required placeholder="Ej: Pérez" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Segundo Apellido</label>
+            <input type="text" id="est_apellido2" name="est_apellido2" placeholder="Ej: Gómez" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Fecha de Nacimiento *</label>
+            <input type="date" id="est_fecha_nac" name="est_fecha_nac" required onchange="calcularEdad()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Edad Automática</label>
+            <input type="text" id="est_edad" name="est_edad" readonly placeholder="Selecciona la fecha" class="w-full bg-indigo-50/60 border border-indigo-200 font-bold text-indigo-700 rounded-xl px-3 py-2.5 text-xs">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Teléfono / Celular *</label>
+            <input type="tel" id="est_celular" name="est_celular" required placeholder="Ej: 3001234567" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Correo Electrónico</label>
+            <input type="email" id="est_correo" name="est_correo" placeholder="estudiante@correo.com" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+
+          <div class="sm:col-span-2">
+            <label class="block font-semibold text-slate-700 mb-1">Dirección de Residencia *</label>
+            <input type="text" id="est_direccion" name="est_direccion" required placeholder="Ej: Calle 10 # 4-20, Vereda San Andrés" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 2: DATOS DEL ACUDIENTE -->
+      <section class="bg-white p-5 sm:p-7 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
+        <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+          <span class="text-2xl">👨‍👩‍👧</span>
+          <div>
+            <h2 class="text-base font-bold text-slate-800">2. Datos del Acudiente / Tutor</h2>
+            <p class="text-xs text-slate-500">Persona responsable del estudiante</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Tipo de Documento *</label>
+            <select id="acu_tipo_doc" name="acu_tipo_doc" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="">Seleccione...</option>
+              <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
+              <option value="Pasaporte">Pasaporte</option>
+              <option value="PPT">PPT (Permiso por Protección Temporal)</option>
+              <option value="Cédula de Extranjería">Cédula de Extranjería</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Número de Documento *</label>
+            <input type="text" id="acu_doc" name="acu_doc" required placeholder="Ej: 72123456" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Nombres Completos *</label>
+            <input type="text" id="acu_nombres" name="acu_nombres" required placeholder="Ej: María Elena" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Apellidos Completos *</label>
+            <input type="text" id="acu_apellidos" name="acu_apellidos" required placeholder="Ej: Gómez Martínez" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Teléfono / Celular de Contacto *</label>
+            <input type="tel" id="acu_celular" name="acu_celular" required placeholder="Ej: 3109876543" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Correo Electrónico *</label>
+            <input type="email" id="acu_correo" name="acu_correo" required placeholder="acudiente@correo.com" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+
+          <div class="sm:col-span-2">
+            <label class="block font-semibold text-slate-700 mb-1">Dirección de Residencia *</label>
+            <input type="text" id="acu_direccion" name="acu_direccion" required placeholder="Ej: Calle 10 # 4-20, Vereda San Andrés" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 3: INFORMACIÓN ACADÉMICA Y SALUD -->
+      <section class="bg-white p-5 sm:p-7 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
+        <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+          <span class="text-2xl">📋</span>
+          <div>
+            <h2 class="text-base font-bold text-slate-800">3. Información Complementaria</h2>
+            <p class="text-xs text-slate-500">Datos médicos e institucionales</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Grado al que Aspira *</label>
+            <select id="grado_aspira" name="grado_aspira" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="">Seleccionar Grado</option>
+              <option value="Sexto (6°)">Sexto (6°)</option>
+              <option value="Séptimo (7°)">Séptimo (7°)</option>
+              <option value="Octavo (8°)">Octavo (8°)</option>
+              <option value="Noveno (9°)">Noveno (9°)</option>
+              <option value="Décimo (10°)">Décimo (10°)</option>
+              <option value="Once (11°)">Once (11°)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">EPS o Afiliación de Salud *</label>
+            <input type="text" id="eps" name="eps" required placeholder="Ej: Coosalud, Nueva EPS" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">RH / Tipo de Sangre *</label>
+            <select id="rh" name="rh" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="">Seleccionar RH</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Botón Guardar / Enviar -->
+      <button type="submit" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-200 text-sm transition-all flex items-center justify-center gap-2">
+        <span>🚀</span> Finalizar y Generar Matrícula PDF
+      </button>
+
+    </form>
+
+  </main>
+
+  <footer class="bg-slate-900 text-slate-500 text-center py-4 text-xs">
+    © 2026 NubeEscolar • Plataforma de Gestión de Matrículas I.E.D. Rural San Andrés
+  </footer>
+
+  <!-- SCRIPT LÓGICO -->
+  <script>
+    const form = document.getElementById('matricula-form');
+
+    // 1. Cálculo Automático de Edad
+    function calcularEdad() {
+      const fechaNacInput = document.getElementById('est_fecha_nac').value;
+      if (!fechaNacInput) return;
+
+      const fechaNac = new Date(fechaNacInput);
+      const hoy = new Date();
+      let edad = hoy.getFullYear() - fechaNac.getFullYear();
+      const mes = hoy.getMonth() - fechaNac.getMonth();
+
+      if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNac.getDate())) {
+        edad--;
+      }
+
+      document.getElementById('est_edad').value = `${edad} años`;
+    }
+
+    // 2. Autoguardado en LocalStorage
+    form.addEventListener('input', () => {
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => data[key] = value);
+      localStorage.setItem('borrador_matricula', JSON.stringify(data));
+    });
+
+    // Cargar datos guardados si existen
+    window.addEventListener('DOMContentLoaded', () => {
+      const guardado = localStorage.getItem('borrador_matricula');
+      if (guardado) {
+        const data = JSON.parse(guardado);
+        Object.keys(data).forEach(key => {
+          if (form.elements[key]) {
+            form.elements[key].value = data[key];
+          }
+        });
+        calcularEdad();
+      }
+    });
+
+    function limpiarBorrador() {
+      if (confirm('¿Deseas borrar los datos autoguardados del formulario?')) {
+        localStorage.removeItem('borrador_matricula');
+        form.reset();
+        document.getElementById('est_edad').value = '';
+      }
+    }
+
+    // 3. Generador de PDF Nativo con el Diseño Exacto
+  form.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const fechaPartes = form.est_fecha_nac.value.split('-');
+  const fechaNacFmt = `${fechaPartes[2]}/${fechaPartes[1]}/${fechaPartes[0]}`;
+
+  const pdfWin = window.open('', '_blank');
+  pdfWin.document.write(`
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <title>Comprobante_Matricula_${form.est_doc.value}</title>
+      <style>
+        /* FORZAR IMPRESIÓN DE FONDOS Y COLORES */
+        @media print {
+          * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+          }
+          @page {
+            size: letter;
+            margin: 8mm;
+          }
+        }
+
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+          background-color: #ffffff;
+          color: #1e293b;
+          padding: 12px;
+          font-size: 11px;
+        }
+
+        /* HEADER AZUL OSCURO CON AÑO LECTIVO */
+        .header {
+          background-color: #1b1b3f !important;
+          color: #ffffff !important;
+          padding: 20px 24px;
+          border-radius: 16px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 16px;
+        }
+        .header-title {
+          font-size: 20px;
+          font-weight: 800;
+          letter-spacing: 0.5px;
+          color: #ffffff !important;
+        }
+        .header-subtitle {
+          font-size: 11px;
+          color: #818cf8 !important;
+          font-weight: 700;
+          margin-top: 4px;
+          letter-spacing: 0.5px;
+        }
+        .badge-year {
+          background-color: #312e81 !important;
+          color: #ffffff !important;
+          padding: 8px 18px;
+          border-radius: 9999px;
+          font-size: 11px;
+          font-weight: 700;
+          border: 1px solid #4338ca;
+          display: inline-block;
+        }
+
+        /* BANNER CONFIRMACIÓN VERDE */
+        .status-box {
+          background-color: #f0fdf4 !important;
+          border: 1px solid #bbf7d0;
+          border-radius: 12px;
+          padding: 12px 16px;
+          margin-bottom: 16px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+        .status-icon {
+          color: #16a34a !important;
+          font-size: 16px;
+          font-weight: bold;
+        }
+        .status-title {
+          font-weight: 800;
+          color: #15803d !important;
+          font-size: 12px;
+        }
+        .status-desc {
+          color: #166534 !important;
+          font-size: 10px;
+        }
+
+        /* SECCIONES Y CONTENEDORES */
+        .section {
+          border: 1px solid #e2e8f0;
+          border-radius: 16px;
+          padding: 16px;
+          margin-bottom: 16px;
+          background-color: #ffffff;
+        }
+        .section-title {
+          font-size: 13px;
+          font-weight: 800;
+          color: #312e81 !important;
+          margin-bottom: 14px;
+        }
+
+        /* FILAS Y CAMPOS GRISES */
+        .grid {
+          display: grid;
+          gap: 10px;
+          margin-bottom: 10px;
+        }
+        .grid-2 { grid-template-columns: 1fr 1fr; }
+        .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+        .field-group { display: flex; flex-direction: column; }
+        .field-label {
+          font-size: 9px;
+          font-weight: 700;
+          color: #64748b;
+          text-transform: uppercase;
+          margin-bottom: 4px;
+        }
+        .field-value {
+          background-color: #f1f5f9 !important;
+          border: 1px solid #e2e8f0;
+          border-radius: 8px;
+          padding: 8px 12px;
+          font-size: 11px;
+          font-weight: 700;
+          color: #0f172a !important;
+          min-height: 34px;
+          display: flex;
+          align-items: center;
+        }
+        /* CAMPO DESTACADO EN VIOLETA SUAVE */
+        .highlight-value {
+          background-color: #e0e7ff !important;
+          border-color: #c7d2fe;
+          color: #3730a3 !important;
+        }
+
+        /* SECCIÓN DE FIRMAS */
+        .signatures {
+          margin-top: 30px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 40px;
+          padding: 0 20px;
+        }
+        .sig-box {
+          text-align: center;
+          border-top: 1px solid #94a3b8;
+          padding-top: 6px;
+        }
+        .sig-line { font-weight: 700; font-size: 10px; color: #334155; }
+        .sig-sub { font-size: 9px; color: #64748b; margin-top: 2px; }
+
+        .footer {
+          margin-top: 20px;
+          text-align: center;
+          font-size: 9px;
+          color: #94a3b8;
+        }
+      </style>
+    </head>
+    <body>
+
+      <!-- HEADER -->
+      <div class="header">
+        <div>
+          <div class="header-title">I.E.D. RURAL SAN ANDRÉS</div>
+          <div class="header-subtitle">COMPROBANTE OFICIAL DE MATRICULA ESCOLAR</div>
+        </div>
+        <div>
+          <span class="badge-year">Año Lectivo 2026</span>
+        </div>
+      </div>
+
+      <!-- BANNER CONFIRMADO -->
+      <div class="status-box">
+        <div class="status-icon">✓</div>
+        <div>
+          <div class="status-title">Registro Completo y Confirmado</div>
+          <div class="status-desc">Los datos del estudiante han sido almacenados correctamente en la plataforma NubeEscolar.</div>
+        </div>
+      </div>
+
+      <!-- 1. ESTUDIANTE -->
+      <div class="section">
+        <div class="section-title">1. INFORMACIÓN DEL ESTUDIANTE</div>
+        
+        <div class="grid grid-2">
+          <div class="field-group">
+            <span class="field-label">Tipo de Documento</span>
+            <div class="field-value">${form.est_tipo_doc.value}</div>
+          </div>
+          <div class="field-group">
+            <span class="field-label">Número de Documento</span>
+            <div class="field-value">${form.est_doc.value}</div>
+          </div>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="field-group">
+            <span class="field-label">Nombres Completos</span>
+            <div class="field-value">${form.est_nombre1.value} ${form.est_nombre2.value}</div>
+          </div>
+          <div class="field-group">
+            <span class="field-label">Apellidos Completos</span>
+            <div class="field-value">${form.est_apellido1.value} ${form.est_apellido2.value}</div>
+          </div>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="field-group">
+            <span class="field-label">Fecha de Nacimiento</span>
+            <div class="field-value">${fechaNacFmt}</div>
+          </div>
+          <div class="field-group">
+            <span class="field-label">Edad Calculada</span>
+            <div class="field-value highlight-value">${form.est_edad.value}</div>
+          </div>
+          <div class="field-group">
+            <span class="field-label">Teléfono / Celular</span>
+            <div class="field-value">${form.est_celular.value}</div>
+          </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-bottom: 0;">
+          <div class="field-group">
+            <span class="field-label">Correo Electrónico</span>
+            <div class="field-value">${form.est_correo.value || 'No registrado'}</div>
+          </div>
+          <div class="field-group">
+            <span class="field-label">Dirección de Residencia</span>
+            <div class="field-value">${form.est_direccion.value}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. ACUDIENTE -->
+      <div class="section">
+        <div class="section-title">2. INFORMACIÓN DEL ACUDIENTE / TUTOR</div>
+
+        <div class="grid grid-2">
+          <div class="field-group">
+            <span class="field-label">Tipo de Documento</span>
+            <div class="field-value">${form.acu_tipo_doc.value}</div>
+          </div>
+          <div class="field-group">
+            <span class="field-label">Número de Documento</span>
+            <div class="field-value">${form.acu_doc.value}</div>
+          </div>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="field-group">
+            <span class="field-label">Nombres Completos</span>
+            <div class="field-value">${form.acu_nombres.value}</div>
+          </div>
+          <div class="field-group">
+            <span class="field-label">Apellidos Completos</span>
+            <div class="field-value">${form.acu_apellidos.value}</div>
+          </div>
+        </div>
+
+        <div class="grid grid-3" style="margin-bottom: 0;">
+          <div class="field-group">
+            <span class="field-label">Teléfono de Contacto</span>
+            <div class="field-value">${form.acu_celular.value}</div>
+          </div>
+          <div class="field-group">
+            <span class="field-label">Correo Electrónico</span>
+            <div class="field-value">${form.acu_correo.value}</div>
+          </div>
+          <div class="field-group">
+            <span class="field-label">Dirección</span>
+            <div class="field-value">${form.acu_direccion.value}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. ACADÉMICA Y SALUD -->
+      <div class="section">
+        <div class="section-title">3. INFORMACIÓN ACADÉMICA Y SALUD</div>
+        <div class="grid grid-3" style="margin-bottom: 0;">
+          <div class="field-group">
+            <span class="field-label">Grado al que Aspira</span>
+            <div class="field-value highlight-value">${form.grado_aspira.value}</div>
+          </div>
+          <div class="field-group">
+            <span class="field-label">EPS / Salud</span>
+            <div class="field-value">${form.eps.value}</div>
+          </div>
+          <div class="field-group">
+            <span class="field-label">RH / Grupo Sanguíneo</span>
+            <div class="field-value">${form.rh.value}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FIRMAS -->
+      <div class="signatures">
+        <div class="sig-box">
+          <div class="sig-line">Firma del Acudiente / Tutor</div>
+          <div class="sig-sub">C.C. No. ${form.acu_doc.value}</div>
+        </div>
+        <div class="sig-box">
+          <div class="sig-line">Rectoría / Secretaría Académica</div>
+          <div class="sig-sub">I.E.D. Rural San Andrés</div>
+        </div>
+      </div>
+
+      <div class="footer">
+        Documento generado electrónicamente por NubeEscolar • Sistema Único de Matrículas
+      </div>
+
+      <script>
+        window.onload = function() {
+          setTimeout(function() {
+            window.print();
+          }, 300);
+        };
+      <\/script>
+    </body>
+    </html>
+  `);
+  pdfWin.document.close();
+});
+  </script>
+</body>
+</html>
