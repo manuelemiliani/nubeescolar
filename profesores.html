@@ -10,10 +10,8 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col relative">
 
-  <!-- Navbar Superior Fija (Adaptada con info de Profesores) -->
+  <!-- Navbar Superior Fija -->
   <header class="bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-700 text-white px-6 lg:px-12 py-3.5 flex items-center justify-between gap-4 shadow-lg fixed top-0 left-0 right-0 z-50">
-    
-    <!-- Izquierda: Logotipo y Nombre Institucional -->
     <div class="flex items-center gap-3">
       <div class="w-10 h-10 rounded-2xl bg-white/25 backdrop-blur-md text-white flex items-center justify-center font-bold text-xl shadow-inner border border-white/30 flex-shrink-0">
         ☁️
@@ -24,16 +22,13 @@
       </div>
     </div>
 
-    <!-- Derecha: Chat, Notificaciones, Perfil del Profesor y Botón Salir -->
     <div class="flex items-center gap-3 relative">
-      
-      <!-- Botón de Chat con Badge -->
       <button onclick="toggleChat(event)" class="relative p-2.5 bg-white/10 hover:bg-white/20 rounded-xl border border-white/20 text-white transition-all shadow-xs cursor-pointer flex-shrink-0" title="Mensajes">
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
         <span class="absolute -top-1 -right-1 bg-indigo-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-md ring-2 ring-indigo-900">1</span>
       </button>
 
-      <!-- Ventana Flotante de Chat (Configurada para Carlos Pérez) -->
+      <!-- Ventana Flotante de Chat -->
       <div id="chatModal" class="hidden absolute top-12 right-28 w-72 bg-white text-slate-800 rounded-2xl shadow-2xl border border-slate-200 p-4 z-50">
         <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
           <h3 class="text-xs font-bold text-slate-800 flex items-center gap-1.5"><span>💬</span> Mensajes de Estudiantes</h3>
@@ -51,13 +46,12 @@
         </div>
       </div>
 
-      <!-- Botón de Notificaciones con Badge -->
       <button onclick="toggleNotificaciones(event)" class="relative p-2.5 bg-white/10 hover:bg-white/20 rounded-xl border border-white/20 text-white transition-all shadow-xs cursor-pointer flex-shrink-0" title="Notificaciones">
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
         <span class="absolute -top-1 -right-1 bg-rose-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-md ring-2 ring-indigo-900">1</span>
       </button>
 
-      <!-- Ventana Flotante de Notificaciones Docentes -->
+      <!-- Ventana Notificaciones -->
       <div id="notifModal" class="hidden absolute top-12 right-12 w-80 bg-white text-slate-800 rounded-2xl shadow-2xl border border-slate-200 p-4 z-50">
         <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
           <h3 class="text-xs font-bold text-slate-800 flex items-center gap-1.5"><span>📢</span> Avisos Académicos</h3>
@@ -70,7 +64,6 @@
         </div>
       </div>
 
-      <!-- Perfil del Profesor (Carlos Pérez) y Botón Salir -->
       <div class="flex items-center gap-3 pl-3 border-l border-white/20">
         <div onclick="abrirModalPerfil()" class="flex items-center gap-2.5 cursor-pointer group" title="Cambiar foto de perfil">
           <div id="avatarContainer" class="w-9 h-9 rounded-xl bg-white text-indigo-700 font-bold flex items-center justify-center text-xs shadow-md group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
@@ -86,13 +79,11 @@
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
         </a>
       </div>
-
     </div>
   </header>
 
-  <!-- Ventana Interactiva de Chat Activo con Carlos Pérez -->
-  <div id="activeChatModal" class="hidden fixed bottom-6 right-6 w-80 sm:w-96 bg-white rounded-3xl shadow-2xl border border-slate-200 z-50 overflow-hidden flex flex-col">
-    <!-- Cabecera del Chat -->
+  <!-- Ventana Interactiva de Chat Activo -->
+  <div id="activeChatModal" class="hidden fixed bottom-4 right-4 left-4 sm:left-auto sm:w-96 bg-white rounded-3xl shadow-2xl border border-slate-200 z-50 overflow-hidden flex flex-col">
     <div class="bg-indigo-600 text-white p-4 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center font-bold text-xs">CP</div>
@@ -103,8 +94,7 @@
       </div>
       <button onclick="cerrarChatActivo()" class="text-white hover:text-indigo-200 text-xs font-bold p-1 cursor-pointer">✕</button>
     </div>
-    <!-- Cuerpo de Mensajes -->
-    <div id="chatMessages" class="p-4 h-64 overflow-y-auto space-y-3 bg-slate-50 text-xs">
+    <div id="chatMessages" class="p-4 h-60 overflow-y-auto space-y-3 bg-slate-50 text-xs">
       <div class="flex justify-start">
         <div class="bg-white p-3 rounded-2xl rounded-tl-xs shadow-xs border border-slate-100 max-w-[80%] text-slate-700">
           <p>Profesor, tengo una duda sobre la nota del último examen, ¿podría revisarla por favor?</p>
@@ -112,16 +102,16 @@
         </div>
       </div>
     </div>
-    <!-- Pie de Entrada de Texto -->
+    <!-- CORREGIDO: text-base en mobile evita el zoom automático de iOS y Android -->
     <div class="p-3 bg-white border-t border-slate-100 flex items-center gap-2">
-      <input type="text" id="chatInputText" placeholder="Escribe un mensaje a Carlos..." class="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" onkeypress="handleChatKeypress(event)">
+      <input type="text" id="chatInputText" placeholder="Escribe un mensaje a Carlos..." class="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-base sm:text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" onkeypress="handleChatKeypress(event)">
       <button onclick="enviarMensajeChat()" class="bg-indigo-600 hover:bg-indigo-700 text-white p-2.5 rounded-xl text-xs font-bold transition-all shadow-md cursor-pointer flex items-center justify-center">
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
       </button>
     </div>
   </div>
 
-  <!-- Modal para Subir o Eliminar Foto de Perfil -->
+  <!-- Modal Perfil -->
   <div id="profileModal" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-slate-100 space-y-4">
       <div class="flex items-center justify-between">
@@ -136,17 +126,14 @@
       </div>
       <div class="flex flex-col gap-2">
         <button onclick="eliminarFoto()" class="w-full py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold rounded-xl transition-colors cursor-pointer">🗑️ Eliminar foto y dejar iniciales (CP)</button>
-        <div class="flex gap-2">
-          <button onclick="cerrarModalPerfil()" class="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl cursor-pointer">Cancelar</button>
-        </div>
+        <button onclick="cerrarModalPerfil()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl cursor-pointer">Cancelar</button>
       </div>
     </div>
   </div>
 
-  <!-- Contenido Principal del Portal de Profesores -->
-  <main class="flex-1 max-w-7xl w-full mx-auto p-6 sm:p-10 pt-28 sm:pt-32 space-y-8">
+  <!-- Contenido Principal -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-10 pt-28 sm:pt-32 space-y-8">
 
-    <!-- Header del Panel Docente -->
     <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-sm">
       <div>
         <span class="px-3 py-1 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-full text-[10px] font-bold uppercase tracking-wider">Portal Docente</span>
@@ -160,52 +147,38 @@
       </div>
     </header>
 
-    <!-- Tarjetas de Estadísticas -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
       <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white p-5 rounded-3xl shadow-lg shadow-indigo-200 flex justify-between items-center">
         <div>
           <p class="text-xs font-medium text-indigo-100">Estudiantes a Cargo</p>
           <p class="text-3xl font-black mt-1">142</p>
         </div>
-        <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
-          👨‍🎓
-        </div>
+        <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-2xl shadow-inner">👨‍🎓</div>
       </div>
-
       <div class="bg-gradient-to-br from-blue-500 to-cyan-500 text-white p-5 rounded-3xl shadow-lg shadow-blue-200 flex justify-between items-center">
         <div>
           <p class="text-xs font-medium text-blue-100">Cursos Asignados</p>
           <p class="text-3xl font-black mt-1">4</p>
         </div>
-        <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
-          🏫
-        </div>
+        <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-2xl shadow-inner">🏫</div>
       </div>
-
       <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-5 rounded-3xl shadow-lg shadow-emerald-200 flex justify-between items-center">
         <div>
           <p class="text-xs font-medium text-emerald-100">Promedio General</p>
           <p class="text-3xl font-black mt-1">4.2 / 5.0</p>
         </div>
-        <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
-          📈
-        </div>
+        <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-2xl shadow-inner">📈</div>
       </div>
-
       <div class="bg-gradient-to-br from-amber-500 to-orange-500 text-white p-5 rounded-3xl shadow-lg shadow-amber-200 flex justify-between items-center">
         <div>
           <p class="text-xs font-medium text-amber-100">Notas Pendientes</p>
           <p class="text-3xl font-black mt-1">12 %</p>
         </div>
-        <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
-          ⏳
-        </div>
+        <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-2xl shadow-inner">⏳</div>
       </div>
     </div>
 
-    <!-- Gráfica y Eventos -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      
       <div class="lg:col-span-2 bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200/80 flex flex-col justify-between">
         <div class="flex justify-between items-center mb-4">
           <h2 class="font-bold text-slate-800 text-base">Rendimiento por Grado (Promedio)</h2>
@@ -234,23 +207,15 @@
                 <p class="text-[11px] text-amber-700">Mañana • 08:00 AM</p>
               </div>
             </div>
-            <div class="flex items-start gap-3 p-3.5 bg-emerald-50/60 rounded-2xl border border-emerald-100">
-              <span class="text-lg">👥</span>
-              <div>
-                <p class="text-xs font-bold text-emerald-950">Comité de Evaluación</p>
-                <p class="text-[11px] text-emerald-700">Lunes 21 de Septiembre</p>
-              </div>
-            </div>
           </div>
         </div>
         <button onclick="alert('Exportando informe rápido en Excel...')" class="mt-6 w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl text-xs transition-colors shadow-lg shadow-indigo-100 cursor-pointer">
           Descargar Informe Consolidado
         </button>
       </div>
-
     </div>
 
-    <!-- Planilla Digital de Calificaciones -->
+    <!-- Planilla Digital -->
     <section id="notas" class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200/80">
       <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-6">
         <div>
@@ -258,7 +223,8 @@
           <p class="text-xs text-slate-500">Ingresa o modifica las notas de tus estudiantes en tiempo real.</p>
         </div>
         <div class="flex gap-3">
-          <select class="bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <!-- CORREGIDO: text-base en mobile para selector -->
+          <select class="bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-base sm:text-xs font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
             <option>Grado 10-A • Matemáticas</option>
             <option>Grado 10-B • Matemáticas</option>
             <option>Grado 11-A • Física</option>
@@ -284,33 +250,25 @@
           <tbody class="divide-y divide-slate-100 font-medium">
             <tr class="hover:bg-slate-50/80 transition-colors">
               <td class="p-3 font-bold text-slate-900">Carlos Andrés Pérez</td>
-              <td class="p-3 text-center"><input type="number" step="0.1" value="4.5" class="w-14 text-center bg-slate-100 border border-slate-300 rounded-lg py-1 focus:ring-2 focus:ring-indigo-500"></td>
-              <td class="p-3 text-center"><input type="number" step="0.1" value="4.8" class="w-14 text-center bg-slate-100 border border-slate-300 rounded-lg py-1 focus:ring-2 focus:ring-indigo-500"></td>
-              <td class="p-3 text-center"><input type="number" step="0.1" value="4.2" class="w-14 text-center bg-slate-100 border border-slate-300 rounded-lg py-1 focus:ring-2 focus:ring-indigo-500"></td>
+              <!-- CORREGIDO: text-base sm:text-xs en inputs de notas -->
+              <td class="p-3 text-center"><input type="number" step="0.1" value="4.5" class="w-16 text-center bg-slate-100 border border-slate-300 rounded-lg py-1 text-base sm:text-xs focus:ring-2 focus:ring-indigo-500"></td>
+              <td class="p-3 text-center"><input type="number" step="0.1" value="4.8" class="w-16 text-center bg-slate-100 border border-slate-300 rounded-lg py-1 text-base sm:text-xs focus:ring-2 focus:ring-indigo-500"></td>
+              <td class="p-3 text-center"><input type="number" step="0.1" value="4.2" class="w-16 text-center bg-slate-100 border border-slate-300 rounded-lg py-1 text-base sm:text-xs focus:ring-2 focus:ring-indigo-500"></td>
               <td class="p-3 text-center font-bold text-emerald-600">4.5</td>
               <td class="p-3 text-center"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-[10px] font-bold">Aprobado</span></td>
             </tr>
             <tr class="hover:bg-slate-50/80 transition-colors">
               <td class="p-3 font-bold text-slate-900">María Camila Rodríguez</td>
-              <td class="p-3 text-center"><input type="number" step="0.1" value="3.8" class="w-14 text-center bg-slate-100 border border-slate-300 rounded-lg py-1 focus:ring-2 focus:ring-indigo-500"></td>
-              <td class="p-3 text-center"><input type="number" step="0.1" value="4.0" class="w-14 text-center bg-slate-100 border border-slate-300 rounded-lg py-1 focus:ring-2 focus:ring-indigo-500"></td>
-              <td class="p-3 text-center"><input type="number" step="0.1" value="3.5" class="w-14 text-center bg-slate-100 border border-slate-300 rounded-lg py-1 focus:ring-2 focus:ring-indigo-500"></td>
+              <td class="p-3 text-center"><input type="number" step="0.1" value="3.8" class="w-16 text-center bg-slate-100 border border-slate-300 rounded-lg py-1 text-base sm:text-xs focus:ring-2 focus:ring-indigo-500"></td>
+              <td class="p-3 text-center"><input type="number" step="0.1" value="4.0" class="w-16 text-center bg-slate-100 border border-slate-300 rounded-lg py-1 text-base sm:text-xs focus:ring-2 focus:ring-indigo-500"></td>
+              <td class="p-3 text-center"><input type="number" step="0.1" value="3.5" class="w-16 text-center bg-slate-100 border border-slate-300 rounded-lg py-1 text-base sm:text-xs focus:ring-2 focus:ring-indigo-500"></td>
               <td class="p-3 text-center font-bold text-emerald-600">3.7</td>
               <td class="p-3 text-center"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-[10px] font-bold">Aprobado</span></td>
-            </tr>
-            <tr class="hover:bg-slate-50/80 transition-colors">
-              <td class="p-3 font-bold text-slate-900">Juan David Morales</td>
-              <td class="p-3 text-center"><input type="number" step="0.1" value="2.5" class="w-14 text-center bg-slate-100 border border-slate-300 rounded-lg py-1 focus:ring-2 focus:ring-indigo-500"></td>
-              <td class="p-3 text-center"><input type="number" step="0.1" value="2.8" class="w-14 text-center bg-slate-100 border border-slate-300 rounded-lg py-1 focus:ring-2 focus:ring-indigo-500"></td>
-              <td class="p-3 text-center"><input type="number" step="0.1" value="3.0" class="w-14 text-center bg-slate-100 border border-slate-300 rounded-lg py-1 focus:ring-2 focus:ring-indigo-500"></td>
-              <td class="p-3 text-center font-bold text-rose-600">2.8</td>
-              <td class="p-3 text-center"><span class="px-2 py-0.5 bg-rose-100 text-rose-700 rounded-full text-[10px] font-bold">Reprobado</span></td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
-
   </main>
 
   <script>
@@ -334,32 +292,23 @@
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false }
-        },
-        scales: {
-          y: { min: 1, max: 5 }
-        }
+        plugins: { legend: { display: false } },
+        scales: { y: { min: 1, max: 5 } }
       }
     });
 
-    function guardarNotas() {
-      alert('¡Calificaciones guardadas exitosamente en el servidor!');
-    }
+    function guardarNotas() { alert('¡Calificaciones guardadas exitosamente en el servidor!'); }
 
-    // Funciones del Chat y Notificaciones (idénticas a la estructura base solicitada)
     function toggleChat(event) {
       event.stopPropagation();
       document.getElementById('notifModal').classList.add('hidden');
-      const modal = document.getElementById('chatModal');
-      modal.classList.toggle('hidden');
+      document.getElementById('chatModal').classList.toggle('hidden');
     }
 
     function toggleNotificaciones(event) {
       event.stopPropagation();
       document.getElementById('chatModal').classList.add('hidden');
-      const modal = document.getElementById('notifModal');
-      modal.classList.toggle('hidden');
+      document.getElementById('notifModal').classList.toggle('hidden');
     }
 
     function abrirConversacion(nombre) {
@@ -377,8 +326,6 @@
       if (!texto) return;
 
       const chatMessages = document.getElementById('chatMessages');
-      
-      // Mensaje del profesor (usuario actual)
       const userMsgDiv = document.createElement('div');
       userMsgDiv.className = 'flex justify-end';
       userMsgDiv.innerHTML = `
@@ -391,7 +338,6 @@
       input.value = '';
       chatMessages.scrollTop = chatMessages.scrollHeight;
 
-      // Respuesta automática simulada del estudiante (Carlos Pérez)
       setTimeout(() => {
         const studentMsgDiv = document.createElement('div');
         studentMsgDiv.className = 'flex justify-start';
@@ -407,29 +353,20 @@
     }
 
     function handleChatKeypress(event) {
-      if (event.key === 'Enter') {
-        enviarMensajeChat();
-      }
+      if (event.key === 'Enter') enviarMensajeChat();
     }
 
-    function abrirModalPerfil() {
-      document.getElementById('profileModal').classList.remove('hidden');
-    }
-
-    function cerrarModalPerfil() {
-      document.getElementById('profileModal').classList.add('hidden');
-    }
+    function abrirModalPerfil() { document.getElementById('profileModal').classList.remove('hidden'); }
+    function cerrarModalPerfil() { document.getElementById('profileModal').classList.add('hidden'); }
 
     function subirFoto(event) {
       const archivo = event.target.files[0];
       if (archivo) {
         const lector = new FileReader();
         lector.onload = function(e) {
-          const avatarImg = document.getElementById('avatarImg');
-          const avatarText = document.getElementById('avatarText');
-          avatarImg.src = e.target.result;
-          avatarImg.classList.remove('hidden');
-          avatarText.classList.add('hidden');
+          document.getElementById('avatarImg').src = e.target.result;
+          document.getElementById('avatarImg').classList.remove('hidden');
+          document.getElementById('avatarText').classList.add('hidden');
           alert('¡Foto de perfil actualizada con éxito!');
           cerrarModalPerfil();
         }
@@ -438,11 +375,9 @@
     }
 
     function eliminarFoto() {
-      const avatarImg = document.getElementById('avatarImg');
-      const avatarText = document.getElementById('avatarText');
-      avatarImg.src = '';
-      avatarImg.classList.add('hidden');
-      avatarText.classList.remove('hidden');
+      document.getElementById('avatarImg').src = '';
+      document.getElementById('avatarImg').classList.add('hidden');
+      document.getElementById('avatarText').classList.remove('hidden');
       document.getElementById('fileInput').value = '';
       alert('Se ha restablecido la foto a las iniciales.');
       cerrarModalPerfil();
@@ -459,6 +394,5 @@
       }
     });
   </script>
-
 </body>
 </html>
