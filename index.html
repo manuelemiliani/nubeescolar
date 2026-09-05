@@ -98,6 +98,15 @@
         transform: translateX(100vw);
       }
     }
+
+    /* Solución para prevenir el zoom automático en móviles en inputs y selects */
+    @media screen and (max-width: 768px) {
+      input[type="text"],
+      input[type="password"],
+      select {
+        font-size: 16px !important;
+      }
+    }
   </style>
 </head>
 <body class="bg-sky-50 min-h-screen flex items-center justify-center relative overflow-hidden font-sans">
