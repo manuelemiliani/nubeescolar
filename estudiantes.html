@@ -7,10 +7,10 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><path d='M3 15a4 4 0 004 4h9a5 5 0 001-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z'/></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col relative">
 
-  <!-- Navbar Superior Estática (Fluye de forma natural con el diseño) -->
-  <header class="bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-700 text-white px-6 lg:px-12 py-3.5 flex items-center justify-between gap-4 shadow-lg w-full z-50">
+  <!-- Navbar Superior Fija -->
+  <header class="bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-700 text-white px-6 lg:px-12 py-3.5 flex items-center justify-between gap-4 shadow-lg fixed top-0 left-0 right-0 z-50">
     
     <!-- Izquierda: Logotipo y Nombre Institucional -->
     <div class="flex items-center gap-3">
@@ -116,8 +116,8 @@
     </div>
   </div>
 
-  <!-- Contenido Principal (Con un espaciado limpio y natural pt-6 para cualquier tamaño de pantalla) -->
-  <main class="flex-1 max-w-7xl w-full mx-auto p-6 sm:p-10 pt-6 space-y-8">
+  <!-- Contenido Principal (Con pt-28 sm:pt-32 para dar el espacio exacto debajo de la barra fija sin exagerar) -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-6 sm:p-10 pt-28 sm:pt-32 space-y-8">
 
     <!-- Header de Bienvenida -->
     <header class="bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-700 text-white p-6 sm:p-8 rounded-3xl shadow-xl shadow-indigo-100 flex flex-col justify-between items-start gap-3">
